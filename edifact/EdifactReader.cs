@@ -1,12 +1,10 @@
-﻿using edifact.SpecifiedSegments;
+﻿using Edifact.SpecifiedSegments;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace EdifactViewer.Edifact
+namespace Edifact
 {
 	public static class EdifactReader
 	{
@@ -24,7 +22,7 @@ namespace EdifactViewer.Edifact
 		}
 		public static ReaderResult ReadData(string data)
 		{
-			Settings settings;
+			ISettings settings;
 			List<Segment> segments;
 
 			if (data.StartsWith("UNA"))
@@ -52,7 +50,8 @@ namespace EdifactViewer.Edifact
 				Segments = segments
 			};
 		}
-		private static IEnumerable<Segment> ExtractSegments(string data, Settings settings)
+
+		private static IEnumerable<Segment> ExtractSegments(string data, ISettings settings)
 		{
 			var segmentBuilder = new StringBuilder(32);
 
@@ -88,8 +87,7 @@ namespace EdifactViewer.Edifact
 			if (segmentBuilder.Length > 0)
 				throw new Exception("Segment with no terminator!");
 		}
-
-		private static Segment CreateSegment(Settings settings, string segmentValue)
+		private static Segment CreateSegment(ISettings settings, string segmentValue)
 		{
 			switch (segmentValue.Substring(0, 3))
 			{
@@ -103,12 +101,11 @@ namespace EdifactViewer.Edifact
 					return new Segment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 			}
 		}
-
 	}
 
 	public class ReaderResult
 	{
 		public List<Segment> Segments { get; internal set; }
-		public Settings Settings { get; internal set; }
+		public ISettings Settings { get; internal set; }
 	}
 }

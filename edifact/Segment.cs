@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace EdifactViewer.Edifact
+namespace Edifact
 {
 	public class Segment
 	{
@@ -45,6 +41,10 @@ namespace EdifactViewer.Edifact
 		public override string ToString()
 		{
 			return ToString(Settings.DEFAULT_ELEMENT_SEPARATOR, Settings.DEFAULT_COMPONENT_SEPARATOR);
+		}
+		public string ToString(ISettings settings)
+		{
+			return ToString(settings.ElementSeparator, settings.ComponentSeparator);
 		}
 		public string ToString(char elementSeparator, char componentSeparator)
 		{

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EdifactViewer.Edifact
+﻿namespace Edifact
 {
-	public class Settings
+	public interface ISettings
+	{
+		char EscapeCharacter { get;  }
+		char DecimalMark { get;  }
+		char SegmentTerminator { get;  }
+		char ElementSeparator { get;  }
+		char ComponentSeparator { get;  }
+	}
+	public class Settings : ISettings
 	{
 		internal const char DEFAULT_ESCAPE_CHARACTER = '?';
 		internal const char DEFAULT_DECIMAL_MARK = '.';
