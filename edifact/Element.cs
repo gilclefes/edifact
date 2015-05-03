@@ -16,7 +16,6 @@ namespace EdifactViewer.Edifact
 			: this()
 		{
 			// ToDo: Kontroller
-
 			foreach (var componentValue in elementValue.Split(componentSeparator))
 			{
 				Components.Add(new Component() { Value = componentValue });
