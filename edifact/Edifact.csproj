@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Component.cs" />
     <Compile Include="EdifactReader.cs" />
+    <Compile Include="EdifactWriter.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Segment.cs" />
