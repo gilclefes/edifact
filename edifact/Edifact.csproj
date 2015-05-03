@@ -7,7 +7,7 @@
     <ProjectGuid>{143EE99A-90F3-4586-B221-2205FEA36B02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>edifact</RootNamespace>
+    <RootNamespace>Edifact</RootNamespace>
     <AssemblyName>edifact</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -46,6 +46,7 @@
     <Compile Include="Segment.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SpecifiedSegments\DtmSegment.cs" />
+    <Compile Include="SpecifiedSegments\QtySegment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

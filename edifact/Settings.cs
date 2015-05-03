@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace EdifactViewer.Edifact
 {
-	class Settings
+	public class Settings
 	{
-		private static Settings _default;
+		internal const char DEFAULT_ESCAPE_CHARACTER = '?';
+		internal const char DEFAULT_DECIMAL_MARK = '.';
+		internal const char DEFAULT_SEGMENT_TERMINATOR = '\'';
+		internal const char DEFAULT_ELEMENT_SEPARATOR = '+';
+		internal const char DEFAULT_COMPONENT_SEPARATOR = ':';
 
 		public Settings()
 		{
-			EscapeCharacter = '?';
-			DecimalMark = '.';
-			SegmentTerminator = '\'';
-			ElementSeparator = '+';
-			ComponentSeparator = ':';
+			EscapeCharacter = DEFAULT_ESCAPE_CHARACTER;
+			DecimalMark = DEFAULT_DECIMAL_MARK;
+			SegmentTerminator = DEFAULT_SEGMENT_TERMINATOR;
+			ElementSeparator = DEFAULT_ELEMENT_SEPARATOR;
+			ComponentSeparator = DEFAULT_COMPONENT_SEPARATOR;
 		}
-
-		public static Settings Default { get { return _default ?? (_default = new Settings()); } }
 
 		// Settings from UNA
 		public char EscapeCharacter { get; set; }

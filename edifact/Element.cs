@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EdifactViewer.Edifact
 {
-	class Element
+	public class Element
 	{
 		internal Element()
 		{
@@ -37,7 +37,7 @@ namespace EdifactViewer.Edifact
 
 		public override string ToString()
 		{
-			return ToString(Settings.Default.ComponentSeparator);
+			return ToString(Settings.DEFAULT_COMPONENT_SEPARATOR);
 		}
 		public string ToString(char componentSeparator)
 		{

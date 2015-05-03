@@ -1,13 +1,14 @@
-﻿using System;
+﻿using EdifactViewer.Edifact;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EdifactViewer.Edifact.SpecifiedSegments
+namespace edifact.SpecifiedSegments
 {
-	class DtmSegment : Segment
+	public class DtmSegment : Segment
 	{
 		public DtmSegment(string segmentValue, char elementSeparator, char componentSeparator) :
 			base(segmentValue, elementSeparator, componentSeparator)
