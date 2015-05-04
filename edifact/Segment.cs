@@ -39,6 +39,7 @@ namespace Edifact
 				Elements[elementIndex][componentIndex] = value;
 			}
 		}
+		public virtual string Description { get { return ""; } }
 
 		public override string ToString()
 		{

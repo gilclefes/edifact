@@ -100,6 +100,9 @@ namespace Edifact
 				case "NAD":
 					return new NadSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
+				case "PIA":
+					return new PiaSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
 				case "QTY":
 					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 

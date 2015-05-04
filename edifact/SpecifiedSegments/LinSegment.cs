@@ -28,7 +28,33 @@ namespace Edifact.SpecifiedSegments
 			}
 			set { base[1, 0] = value.ToString(); }
 		}
-		public string Identifier { get { return base[3, 0]; } set { base[3, 0] = value; } }
-		public string IdentifierType { get { return base[3, 1]; } set { base[3, 1] = value; } }
+		public string Identifier { get { return base[3, 0] ?? ""; } set { base[3, 0] = value; } }
+		public string IdentifierType { get { return base[3, 1] ?? ""; } set { base[3, 1] = value; } }
+
+		public override string Description
+		{
+			get
+			{
+				var sb = new StringBuilder(64);
+				sb.Append("Line ");
+				sb.Append(LineNumber);
+
+				if (Identifier.Length > 0)
+				{
+					switch (IdentifierType)
+					{
+						case "EN":
+							sb.Append(", EAN: ");
+							break;
+						default:
+							sb.Append(", ");
+							break;
+					}
+					sb.Append(Identifier);
+				}
+
+				return sb.ToString();
+			}
+		}
 	}
 }

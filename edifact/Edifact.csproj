@@ -49,6 +49,7 @@
     <Compile Include="SpecifiedSegments\DtmSegment.cs" />
     <Compile Include="SpecifiedSegments\LinSegment.cs" />
     <Compile Include="SpecifiedSegments\NadSegment.cs" />
+    <Compile Include="SpecifiedSegments\PiaSegment.cs" />
     <Compile Include="SpecifiedSegments\QtySegment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

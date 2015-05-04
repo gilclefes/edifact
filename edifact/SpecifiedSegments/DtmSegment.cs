@@ -15,9 +15,23 @@ namespace Edifact.SpecifiedSegments
 		{
 		}
 
-		public string DateType { get { return base[1, 0]; } set { base[1, 0] = value; } }
+		public string DateType { get { return base[1, 0] ?? ""; } set { base[1, 0] = value; } }
 		public DateTime Date { get { return String2DateTime(base[1, 1], DateFormat); } }
 		public string DateFormat { get { return base[1, 2]; } }
+
+		public override string Description
+		{
+			get
+			{
+				switch (DateType)
+				{
+					case "137":
+						return "Document date " + Date.ToShortDateString();
+					default:
+						return Date.ToShortDateString();
+				}
+			}
+		}
 
 		public static DateTime String2DateTime(string date, string format)
 		{

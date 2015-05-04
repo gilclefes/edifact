@@ -18,7 +18,7 @@ namespace Edifact
 
 		public Settings()
 		{
-			UnaSegment = "UNA:+.?'";
+			UnaSegment = "UNA:+.? '";
 		}
 
 		// UNA
@@ -27,7 +27,7 @@ namespace Edifact
 			get { return new string(_unaSegment); }
 			set
 			{
-				if (!Regex.IsMatch(value, "^UNA.{9}$"))
+				if (!Regex.IsMatch(value, "^UNA......$"))
 					throw new ArgumentException("value", "Not valid segment får UNA");
 				_unaSegment = value.ToCharArray();
 			}
