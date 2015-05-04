@@ -5,6 +5,7 @@ namespace Edifact
 {
 	public interface ISettings
 	{
+		string UnaSegment { get; }
 		char ComponentSeparator { get; }
 		char ElementSeparator { get; }
 		char DecimalMark { get; }
@@ -13,40 +14,29 @@ namespace Edifact
 	}
 	public class Settings : ISettings
 	{
-		internal const char DEFAULT_ESCAPE_CHARACTER = '?';
-		internal const char DEFAULT_DECIMAL_MARK = '.';
-		internal const char DEFAULT_SEGMENT_TERMINATOR = '\'';
-		internal const char DEFAULT_ELEMENT_SEPARATOR = '+';
-		internal const char DEFAULT_COMPONENT_SEPARATOR = ':';
+		private char[] _unaSegment;
 
 		public Settings()
 		{
-			ComponentSeparator = DEFAULT_COMPONENT_SEPARATOR;
-			ElementSeparator = DEFAULT_ELEMENT_SEPARATOR;
-			DecimalMark = DEFAULT_DECIMAL_MARK;
-			EscapeCharacter = DEFAULT_ESCAPE_CHARACTER;
-			SegmentTerminator = DEFAULT_SEGMENT_TERMINATOR;
+			UnaSegment = "UNA:+.?'";
 		}
 
-		public string GetUnaSegment()
+		// UNA
+		public string UnaSegment
 		{
-			var sb = new StringBuilder(8);
-			sb.Append("UNA");
-			sb.Append(ComponentSeparator);
-			sb.Append(ElementSeparator);
-			sb.Append(DecimalMark);
-			sb.Append(EscapeCharacter);
-			sb.Append(' ');
-			sb.Append(SegmentTerminator);
-			return sb.ToString();
+			get { return new string(_unaSegment); }
+			set
+			{
+				if (!Regex.IsMatch(value, "^UNA.{9}$"))
+					throw new ArgumentException("value", "Not valid segment får UNA");
+				_unaSegment = value.ToCharArray();
+			}
 		}
-
-		// Settings from UNA
-		public char ComponentSeparator { get; set; }
-		public char ElementSeparator { get; set; }
-		public char DecimalMark { get; set; }
-		public char EscapeCharacter { get; set; }
-		public char SegmentTerminator { get; set; }
+		public char ComponentSeparator { get { return _unaSegment[3]; } set { _unaSegment[3] = value; } }
+		public char ElementSeparator { get { return _unaSegment[4]; } set { _unaSegment[4] = value; } }
+		public char DecimalMark { get { return _unaSegment[5]; } set { _unaSegment[5] = value; } }
+		public char EscapeCharacter { get { return _unaSegment[6]; } set { _unaSegment[6] = value; } }
+		public char SegmentTerminator { get { return _unaSegment[8]; } set { _unaSegment[8] = value; } }
 
 	}
 }
