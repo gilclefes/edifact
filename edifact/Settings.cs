@@ -1,12 +1,15 @@
-﻿namespace Edifact
+﻿using System;
+using System.Text;
+using System.Text.RegularExpressions;
+namespace Edifact
 {
 	public interface ISettings
 	{
-		char EscapeCharacter { get;  }
-		char DecimalMark { get;  }
-		char SegmentTerminator { get;  }
-		char ElementSeparator { get;  }
-		char ComponentSeparator { get;  }
+		char ComponentSeparator { get; }
+		char ElementSeparator { get; }
+		char DecimalMark { get; }
+		char EscapeCharacter { get; }
+		char SegmentTerminator { get; }
 	}
 	public class Settings : ISettings
 	{
@@ -18,19 +21,32 @@
 
 		public Settings()
 		{
-			EscapeCharacter = DEFAULT_ESCAPE_CHARACTER;
-			DecimalMark = DEFAULT_DECIMAL_MARK;
-			SegmentTerminator = DEFAULT_SEGMENT_TERMINATOR;
-			ElementSeparator = DEFAULT_ELEMENT_SEPARATOR;
 			ComponentSeparator = DEFAULT_COMPONENT_SEPARATOR;
+			ElementSeparator = DEFAULT_ELEMENT_SEPARATOR;
+			DecimalMark = DEFAULT_DECIMAL_MARK;
+			EscapeCharacter = DEFAULT_ESCAPE_CHARACTER;
+			SegmentTerminator = DEFAULT_SEGMENT_TERMINATOR;
+		}
+
+		public string GetUnaSegment()
+		{
+			var sb = new StringBuilder(8);
+			sb.Append("UNA");
+			sb.Append(ComponentSeparator);
+			sb.Append(ElementSeparator);
+			sb.Append(DecimalMark);
+			sb.Append(EscapeCharacter);
+			sb.Append(' ');
+			sb.Append(SegmentTerminator);
+			return sb.ToString();
 		}
 
 		// Settings from UNA
-		public char EscapeCharacter { get; set; }
-		public char DecimalMark { get; set; }
-		public char SegmentTerminator { get; set; }
-		public char ElementSeparator { get; set; }
 		public char ComponentSeparator { get; set; }
+		public char ElementSeparator { get; set; }
+		public char DecimalMark { get; set; }
+		public char EscapeCharacter { get; set; }
+		public char SegmentTerminator { get; set; }
 
 	}
 }

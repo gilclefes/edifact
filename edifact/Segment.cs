@@ -28,6 +28,8 @@ namespace Edifact
 		{
 			get
 			{
+				if (elementIndex >= Elements.Count)
+					return null;
 				return Elements[elementIndex][componentIndex];
 			}
 			set
@@ -40,15 +42,11 @@ namespace Edifact
 
 		public override string ToString()
 		{
-			return ToString(Settings.DEFAULT_ELEMENT_SEPARATOR, Settings.DEFAULT_COMPONENT_SEPARATOR);
+			return ToString(new Settings());
 		}
 		public string ToString(ISettings settings)
 		{
-			return ToString(settings.ElementSeparator, settings.ComponentSeparator);
-		}
-		public string ToString(char elementSeparator, char componentSeparator)
-		{
-			return string.Join(elementSeparator.ToString(), Elements.Select(x => x.ToString(componentSeparator)));
+			return string.Join(settings.ElementSeparator.ToString(), Elements.Select(x => x.ToString(settings)));
 		}
 	}
 }

@@ -22,7 +22,12 @@ namespace Edifact
 		public List<Component> Components { get; private set; }
 		public string this[int componentIndex]
 		{
-			get { return Components[componentIndex].Value; }
+			get
+			{
+				if (componentIndex >= Components.Count)
+					return null;
+				return Components[componentIndex].Value;
+			}
 			set
 			{
 				while (Components.Count < componentIndex + 1)
@@ -33,11 +38,11 @@ namespace Edifact
 
 		public override string ToString()
 		{
-			return ToString(Settings.DEFAULT_COMPONENT_SEPARATOR);
+			return ToString(new Settings());
 		}
-		public string ToString(char componentSeparator)
+		public string ToString(ISettings settings)
 		{
-			return string.Join(componentSeparator.ToString(), Components.Select(x => x.Value));
+			return string.Join(settings.ComponentSeparator.ToString(), Components.Select(x => x.ToString(settings)));
 		}
 	}
 }
