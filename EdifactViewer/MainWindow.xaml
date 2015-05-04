@@ -1,8 +1,24 @@
 ﻿<Window x:Class="EdifactViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Edifact Reader" Height="529" Width="992" MinWidth="400" MinHeight="200" MaxWidth="1080" MaxHeight="800" SizeToContent="WidthAndHeight">
+	<Grid>
+		<ListView ItemsSource="{Binding Segments}" Drop="ListView_Drop" AllowDrop="true">
+			<ListView.View>
+				<GridView>
+					<GridView.Columns>
+						<GridViewColumn Header="#" DisplayMemberBinding="{Binding SegmentNumber}" />
+						<GridViewColumn Header="Segment">
+							<GridViewColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding SegmentText}" Margin="{Binding SegmentMargin}" />
+								</DataTemplate>
+							</GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="Beskrivning" DisplayMemberBinding="{Binding SegmentDescription}" />
+					</GridView.Columns>
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
 </Window>
