@@ -60,7 +60,7 @@ namespace Edifact
 				char c = data[i];
 
 				// Blank, Tab, LF, CR
-				if (c == ' ' || (int)c == 9 || (int)c == 10 || (int)c == 13)
+				if (segmentBuilder.Length < 0 && (c == ' ' || (int)c == 9 || (int)c == 10 || (int)c == 13))
 				{
 					// Skip character
 				}
@@ -93,7 +93,13 @@ namespace Edifact
 			{
 				case "DTM":
 					return new DtmSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
-				
+
+				case "LIN":
+					return new LinSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
+				case "NAD":
+					return new NadSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
 				case "QTY":
 					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
