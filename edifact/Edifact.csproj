@@ -43,13 +43,16 @@
     <Compile Include="EdifactReader.cs" />
     <Compile Include="EdifactWriter.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Segment.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SpecifiedSegments\DtmSegment.cs" />
     <Compile Include="SpecifiedSegments\LinSegment.cs" />
+    <Compile Include="SpecifiedSegments\MoaSegment.cs" />
     <Compile Include="SpecifiedSegments\NadSegment.cs" />
     <Compile Include="SpecifiedSegments\PiaSegment.cs" />
+    <Compile Include="SpecifiedSegments\PriSegment.cs" />
     <Compile Include="SpecifiedSegments\QtySegment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,6 +28,7 @@ namespace Edifact
 			if (data.StartsWith("UNA"))
 			{
 				settings = new Settings()
+
 				{
 					ComponentSeparator = data[3],
 					ElementSeparator = data[4],
@@ -59,10 +60,13 @@ namespace Edifact
 			{
 				char c = data[i];
 
-				// Blank, Tab, LF, CR
-				if (segmentBuilder.Length < 0 && (c == ' ' || (int)c == 9 || (int)c == 10 || (int)c == 13))
+				if ((int)c == 9 || (int)c == 10 || (int)c == 13)
 				{
-					// Skip character
+					// Skup Tab, LF, CR
+				}
+				else if (c == ' ' && segmentBuilder.Length < 0)
+				{
+					// Skip Blank if segment is empty until now
 				}
 				else if (c == settings.EscapeCharacter)
 				{
@@ -97,11 +101,17 @@ namespace Edifact
 				case "LIN":
 					return new LinSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
+				case "MOA":
+					return new MoaSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator, settings.DecimalMark);
+
 				case "NAD":
 					return new NadSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
 				case "PIA":
 					return new PiaSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
+				case "PRI":
+					return new PriSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator, settings.DecimalMark);
 
 				case "QTY":
 					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
