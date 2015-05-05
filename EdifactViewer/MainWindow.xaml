@@ -3,19 +3,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Edifact Reader" Height="529" Width="992" MinWidth="400" MinHeight="200" MaxWidth="1080" MaxHeight="800" SizeToContent="WidthAndHeight" Icon="icon.ico">
 	<Grid>
-		<ListView ItemsSource="{Binding Segments}" Drop="ListView_Drop" AllowDrop="true">
+		<ListView ItemsSource="{Binding Segments}" Drop="ListView_Drop" AllowDrop="true" >
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
 			<ListView.View>
 				<GridView>
 					<GridView.Columns>
-						<GridViewColumn Header="#" DisplayMemberBinding="{Binding SegmentNumber}" />
-						<GridViewColumn Header="Segment">
+						<GridViewColumn Header="#">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding SegmentText}" Margin="{Binding SegmentMargin}" />
+									<Border BorderThickness="{Binding SegmentBorder}" BorderBrush="#FFCCCCCC" Margin="-6,-2,-6,-2" Padding="6,2,6,2">
+										<TextBlock Text="{Binding SegmentNumber}" TextAlignment="Right" />
+									</Border>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
-						<GridViewColumn Header="Beskrivning" DisplayMemberBinding="{Binding SegmentDescription}" />
+						<GridViewColumn Header="Segment">
+							<GridViewColumn.CellTemplate>
+								<DataTemplate>
+									<Border BorderThickness="{Binding SegmentBorder}" BorderBrush="#FFCCCCCC" Margin="-6,-2,-6,-2" Padding="6,2,6,2">
+										<TextBlock Text="{Binding SegmentText}" Margin="{Binding SegmentMargin}" />
+									</Border>
+								</DataTemplate>
+							</GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="Beskrivning">
+							<GridViewColumn.CellTemplate>
+								<DataTemplate>
+									<Border BorderThickness="{Binding SegmentBorder}" BorderBrush="#FFCCCCCC" Margin="-6,-2,-6,-2" Padding="6,2,6,2">
+										<TextBlock Text="{Binding SegmentDescription}" />
+									</Border>
+								</DataTemplate>
+							</GridViewColumn.CellTemplate>
+						</GridViewColumn>
 					</GridView.Columns>
 				</GridView>
 			</ListView.View>

@@ -60,7 +60,7 @@ namespace EdifactViewer
 						break;
 				}
 
-				var sgmnt = new SegmentWrapper(++segmentNumber, segment) { SegmentMargin = new Thickness(leftPadding * 20, 0, 0, 0) };
+				var sgmnt = new SegmentWrapper(++segmentNumber, segment, result.Settings) { SegmentMargin = new Thickness(leftPadding * 20, 0, 0, 0) };
 
 				switch (segment.Tag)
 				{
@@ -73,6 +73,17 @@ namespace EdifactViewer
 					case "UNT":
 					case "CNT":
 						leftPadding--;
+						break;
+				}
+
+				switch (segment.Tag)
+				{
+					case "LIN":
+					case "UNS":
+						sgmnt.SegmentBorder = new Thickness(0, 1, 0, 0);
+						break;
+					default:
+						sgmnt.SegmentBorder = new Thickness(0, 0, 0, 0);
 						break;
 				}
 
@@ -93,17 +104,21 @@ namespace EdifactViewer
 		{
 			private readonly int _segmentNumber;
 			private readonly Edifact.Segment _segment;
-			public SegmentWrapper(int segmentNumber, Edifact.Segment segment)
+			private readonly Edifact.ISettings _settings;
+			public SegmentWrapper(int segmentNumber, Edifact.Segment segment, Edifact.ISettings settings)
 			{
 				_segmentNumber = segmentNumber;
 				_segment = segment;
+				_settings = settings;
 				SegmentMargin = new Thickness(0);
 			}
 			public int SegmentNumber { get { return _segmentNumber; } }
 			public Edifact.Segment Segment { get { return _segment; } }
-			public string SegmentText { get { return _segment.ToString(); } }
+			public Edifact.ISettings Settings { get { return _settings; } }
+			public string SegmentText { get { return _segment.ToString() + _settings.SegmentTerminator; } }
 			public string SegmentDescription { get { return Segment.Description; } }
 
+			public Thickness SegmentBorder { get; set; }
 			public Thickness SegmentMargin { get; set; }
 		}
 
