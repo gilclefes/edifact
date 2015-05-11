@@ -113,6 +113,9 @@ namespace Edifact
 				case "PRI":
 					return new PriSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator, settings.DecimalMark);
 
+				case "RFF":
+					return new RffSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
 				case "QTY":
 					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
