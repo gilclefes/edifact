@@ -95,8 +95,14 @@ namespace Edifact
 		{
 			switch (segmentValue.Substring(0, 3))
 			{
+				case "CUX":
+					return new CuxSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
 				case "DTM":
 					return new DtmSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
+				case "IMD":
+					return new ImdSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
 				case "LIN":
 					return new LinSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
@@ -115,6 +121,9 @@ namespace Edifact
 
 				case "RFF":
 					return new RffSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+
+				case "TAX":
+					return new TaxSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
 				case "QTY":
 					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
