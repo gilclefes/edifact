@@ -34,6 +34,18 @@ namespace Edifact.SpecifiedSegments
 			{
 				switch (MonetaryType)
 				{
+					case "9":
+						return "Payable amount: " + MonetaryAmount.ToString("N2");
+					case "77":
+						return "Invoice amount: " + MonetaryAmount.ToString("N2");
+					case "79":
+						return "Total line items amount: " + MonetaryAmount.ToString("N2");
+					case "124":
+						return "Tax amount: " + MonetaryAmount.ToString("N2");
+					case "125":
+						return "Taxable amount: " + MonetaryAmount.ToString("N2");
+					case "176":
+						return "Total duty/tax/fee amount: " + MonetaryAmount.ToString("N2");
 					case "203":
 						return "Line item amount: " + MonetaryAmount.ToString("N2");
 					case "165":
