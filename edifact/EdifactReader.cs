@@ -8,12 +8,12 @@ namespace Edifact
 {
 	public static class EdifactReader
 	{
-		public static ReaderResult ReadFile(FileInfo fi)
+		public static ReaderResult ReadFile(FileInfo fi, Encoding enc)
 		{
 			string data;
 
 			using (var f = File.Open(fi.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-			using (var reader = new StreamReader(f))
+			using (var reader = new StreamReader(f, enc))
 			{
 				data = reader.ReadToEnd();
 			}

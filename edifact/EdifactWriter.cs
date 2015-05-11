@@ -6,9 +6,9 @@ namespace Edifact
 {
 	public static class EdifactWriter
 	{
-		public static void WriteFile(ISettings settings, List<Segment> segments, FileInfo fi)
+		public static void WriteFile(ISettings settings, List<Segment> segments, FileInfo fi, Encoding enc)
 		{
-			using (var f = new StreamWriter(fi.FullName, false, Encoding.UTF8))
+			using (var f = new StreamWriter(fi.FullName, false, enc))
 			{
 				f.Write(WriteData(settings, segments));
 			}
