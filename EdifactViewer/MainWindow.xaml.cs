@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Edifact;
 
 namespace EdifactViewer
 {
@@ -33,14 +24,14 @@ namespace EdifactViewer
 		private readonly MainModel _model;
 		public MainModel Model { get { return _model; } }
 
-		private void LoadEdifact(System.IO.FileInfo fi)
+		private void LoadEdifact(FileInfo fi)
 		{
 			Model.Segments.Clear();
 
 			if (!fi.Exists)
 				return;
 
-			var result = Edifact.EdifactReader.ReadFile(fi);
+			var result = EdifactReader.ReadFile(fi, Encoding.Default);
 
 			// A edi file must contains of at least 4 lines (Self maid rule)
 			if (result.Segments.Count < 4)
@@ -53,6 +44,11 @@ namespace EdifactViewer
 			{
 				switch (segment.Tag)
 				{
+					case "UNS":
+					case "UNT":
+					case "UNZ":
+						leftPadding--;
+						break;
 					case "LIN":
 						if (!firstLin)
 							leftPadding--;
@@ -64,15 +60,10 @@ namespace EdifactViewer
 
 				switch (segment.Tag)
 				{
-					case "LIN":
+					case "UNB":
 					case "UNH":
-					case "BGM":
+					case "LIN":
 						leftPadding++;
-						break;
-					case "UNS":
-					case "UNT":
-					case "CNT":
-						leftPadding--;
 						break;
 				}
 
@@ -91,63 +82,55 @@ namespace EdifactViewer
 			}
 		}
 
-		public class MainModel
-		{
-			public MainModel()
-			{
-				Segments = new ObservableCollection<SegmentWrapper>();
-			}
-			public ObservableCollection<SegmentWrapper> Segments { get; set; }
-		}
-
-		public class SegmentWrapper
-		{
-			private readonly int _segmentNumber;
-			private readonly Edifact.Segment _segment;
-			private readonly Edifact.ISettings _settings;
-			public SegmentWrapper(int segmentNumber, Edifact.Segment segment, Edifact.ISettings settings)
-			{
-				_segmentNumber = segmentNumber;
-				_segment = segment;
-				_settings = settings;
-				SegmentMargin = new Thickness(0);
-			}
-			public int SegmentNumber { get { return _segmentNumber; } }
-			public Edifact.Segment Segment { get { return _segment; } }
-			public Edifact.ISettings Settings { get { return _settings; } }
-			public string SegmentText { get { return _segment.ToString() + _settings.SegmentTerminator; } }
-			public string SegmentDescription { get { return Segment.Description; } }
-
-			public Thickness SegmentBorder { get; set; }
-			public Thickness SegmentMargin { get; set; }
-		}
-
-		private void ListView_DragEnter(object sender, DragEventArgs e)
-		{
-			e.Effects = DragDropEffects.Copy;
-			//if (e.Data.GetDataPresent(DataFormats.StringFormat))
-			//{
-			//	string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
-			//}
-		}
 		private void ListView_Drop(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+				return;
+
+			var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (!files.Any())
+				return;
+
+			try
 			{
-				var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-				if (!files.Any())
-					return;
-
-				try
-				{
-					LoadEdifact(new FileInfo(files[0]));
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
-
+				LoadEdifact(new FileInfo(files[0]));
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
 	}
+
+	public class MainModel
+	{
+		public MainModel()
+		{
+			Segments = new ObservableCollection<SegmentWrapper>();
+		}
+		public ObservableCollection<SegmentWrapper> Segments { get; set; }
+	}
+
+	public class SegmentWrapper
+	{
+		private readonly int _segmentNumber;
+		private readonly Segment _segment;
+		private readonly ISettings _settings;
+		public SegmentWrapper(int segmentNumber, Segment segment, ISettings settings)
+		{
+			_segmentNumber = segmentNumber;
+			_segment = segment;
+			_settings = settings;
+			SegmentMargin = new Thickness(0);
+		}
+		public int SegmentNumber { get { return _segmentNumber; } }
+		public Segment Segment { get { return _segment; } }
+		public ISettings Settings { get { return _settings; } }
+		public string SegmentText { get { return _segment.ToString() + _settings.SegmentTerminator; } }
+		public string SegmentDescription { get { return Segment.Description; } }
+
+		public Thickness SegmentBorder { get; set; }
+		public Thickness SegmentMargin { get; set; }
+	}
+
 }

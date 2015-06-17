@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Edifact.SpecifiedSegments
 {
 	public class LinSegment : Segment
 	{
 		public LinSegment()
-			: base()
 		{
 		}
 		public LinSegment(string segmentValue, char elementSeparator, char componentSeparator) :

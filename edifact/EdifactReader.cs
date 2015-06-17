@@ -1,8 +1,9 @@
-﻿using Edifact.SpecifiedSegments;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Edifact.SpecifiedSegments;
 
 namespace Edifact
 {
@@ -23,7 +24,6 @@ namespace Edifact
 		public static ReaderResult ReadData(string data)
 		{
 			ISettings settings;
-			List<Segment> segments;
 
 			if (data.StartsWith("UNA"))
 			{
@@ -42,13 +42,11 @@ namespace Edifact
 			{
 				settings = new Settings();
 			}
-
-			segments = new List<Segment>(ExtractSegments(data, settings));
-
+			
 			return new ReaderResult()
 			{
 				Settings = settings,
-				Segments = segments
+				Segments = ExtractSegments(data, settings).ToList()
 			};
 		}
 
@@ -60,9 +58,9 @@ namespace Edifact
 			{
 				char c = data[i];
 
-				if ((int)c == 9 || (int)c == 10 || (int)c == 13)
+				if (c == 9 || c == 10 || c == 13)
 				{
-					// Skup Tab, LF, CR
+					// Skip Tab, LF, CR
 				}
 				else if (c == ' ' && segmentBuilder.Length < 0)
 				{

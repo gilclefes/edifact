@@ -6,7 +6,6 @@ namespace Edifact.SpecifiedSegments
 	public class DtmSegment : Segment
 	{
 		public DtmSegment()
-			: base()
 		{
 			SetDate(new DateTime(1900, 1, 1), "102");
 		}

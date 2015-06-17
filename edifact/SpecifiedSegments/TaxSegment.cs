@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Edifact.SpecifiedSegments
+﻿namespace Edifact.SpecifiedSegments
 {
 	public class TaxSegment : Segment
 	{
 		public TaxSegment()
-			: base()
 		{
 		}
 		public TaxSegment(string segmentValue, char elementSeparator, char componentSeparator) :

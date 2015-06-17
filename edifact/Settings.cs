@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Text.RegularExpressions;
+
 namespace Edifact
 {
 	public interface ISettings
@@ -28,7 +28,7 @@ namespace Edifact
 			set
 			{
 				if (!Regex.IsMatch(value, "^UNA......$"))
-					throw new ArgumentException("value", "Not valid segment får UNA");
+					throw new ArgumentException("Not valid segment får UNA", "value");
 				_unaSegment = value.ToCharArray();
 			}
 		}

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Edifact.SpecifiedSegments
+﻿namespace Edifact.SpecifiedSegments
 {
 	public class PriSegment : Segment
 	{
 		private readonly char _decimalPoint;
 		public PriSegment(char decimalPoint)
-			: base()
 		{
 			_decimalPoint = decimalPoint;
 		}

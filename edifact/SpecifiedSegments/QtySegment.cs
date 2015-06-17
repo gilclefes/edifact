@@ -4,7 +4,6 @@ namespace Edifact.SpecifiedSegments
 	public class QtySegment : Segment
 	{
 		public QtySegment()
-			: base()
 		{ }
 		public QtySegment(string segmentValue, char elementSeparator, char componentSeparator) :
 			base(segmentValue, elementSeparator, componentSeparator)

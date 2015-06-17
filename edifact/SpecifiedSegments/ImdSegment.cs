@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Edifact.SpecifiedSegments
+﻿namespace Edifact.SpecifiedSegments
 {
 	public class ImdSegment : Segment
 	{
 		public ImdSegment()
-			: base()
 		{
 		}
 		public ImdSegment(string segmentValue, char elementSeparator, char componentSeparator) :

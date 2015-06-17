@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Edifact.SpecifiedSegments
+﻿namespace Edifact.SpecifiedSegments
 {
 	public class CuxSegment : Segment
 	{
 		public CuxSegment()
-			: base()
 		{
 		}
 		public CuxSegment(string segmentValue, char elementSeparator, char componentSeparator) :

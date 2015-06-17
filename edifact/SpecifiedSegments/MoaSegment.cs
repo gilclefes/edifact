@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Edifact.SpecifiedSegments
+﻿namespace Edifact.SpecifiedSegments
 {
 	public class MoaSegment : Segment
 	{
 		private readonly char _decimalPoint;
 		public MoaSegment(char decimalPoint)
-			: base()
 		{
 			_decimalPoint = decimalPoint;
 		}
