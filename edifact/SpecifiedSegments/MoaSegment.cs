@@ -14,6 +14,8 @@
 		}
 
 		public string MonetaryType { get { return base[1, 0] ?? ""; } set { base[1, 0] = value; } }
+
+        public string MonetaryCurrency { get { return base[1, 2] ?? ""; } set { base[1, 2] = value; } }
 		public decimal MonetaryAmount
 		{
 			get { return Helper.Str2Dec(base[1, 1], _decimalPoint); }

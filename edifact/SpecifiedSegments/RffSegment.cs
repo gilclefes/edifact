@@ -17,13 +17,8 @@
 		{
 			get
 			{
-				switch (QualifierCode)
-				{
-					case "VA":
-						return "Vat number: " + Identifier;
-					default:
-						return "Reference: " + Identifier;
-				}
+								
+						return  Identifier;
 			}
 		}
 	}
