@@ -30,7 +30,7 @@ namespace Edifact
 				settings = new Settings()
 
 				{
-					ComponentSeparator = data[3],
+				
 					ElementSeparator = data[4],
 					DecimalMark = data[5],
 					EscapeCharacter = data[6],
@@ -93,14 +93,14 @@ namespace Edifact
 		{
 			switch (segmentValue.Substring(0, 3))
 			{
-				case "CUX":
-					return new CuxSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+				case "EQD":
+					return new EqdSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
 				case "DTM":
 					return new DtmSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
-				case "IMD":
-					return new ImdSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+				case "FTX":
+					return new FtxSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
 				case "LIN":
 					return new LinSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
@@ -111,21 +111,30 @@ namespace Edifact
 				case "NAD":
 					return new NadSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
-				case "PIA":
-					return new PiaSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
-
-				case "PRI":
-					return new PriSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator, settings.DecimalMark);
-
+			
+				case "TDT":
+                    return new TdtSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+                case "GIS":
+                    return new GisSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+                case "PCI":
+                    return new PciSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 				case "RFF":
 					return new RffSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
-				case "TAX":
-					return new TaxSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+				case "LOC":
+					return new LocSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
-				case "QTY":
-					return new QtySegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+				case "GID":
+					return new GidSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 
+                case "MEA":
+                    return new MeaSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+                case "UNB":
+                    return new UnbSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+                case "BGM":
+                    return new BgmSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
+                case "SEL":
+                    return new SelSegment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 				default:
 					return new Segment(segmentValue, settings.ElementSeparator, settings.ComponentSeparator);
 			}
